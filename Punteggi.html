@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Punteggi</title>
+        <script type='text/javascript'>
+        var flag;
+        do{
+            flag=0;
+            var giocatori = parseInt(prompt("Quanti giocatori siete?"));
+            if(isNaN(giocatori))
+            {
+                alert("Parametro inserito non e' un numero");
+                flag=1;
+            }
+            if(giocatori>12)
+            {
+                alert("Troppi giocatori");
+                flag=1;
+            }
+        }while(flag==1);
+        // Inizio(document.getElementById('my_table'));
+
+        // function Inizio(id_table)
+        // {
+        //     var table = document.getElementById('my_table');
+        //     var header = table.createTHead();
+        //     var row = header.insertRow(0);
+        //     for(var i=0;i<giocatori;i++)
+        //     {
+        //         var cell = row.insertCell(0);
+        //         cell.innerHTML = "<b>"+prompt("Nome del Giocatore ")+ (i+1) +"</b>";
+        //     }
+        // }
+
+        var somma=[];
+        for(var i=0;i<giocatori;i++)
+            somma[i]=0
+
+            function AggiungiRigaPunteggio(id_table)
+            {
+                var table = document.getElementById(id_table);
+                var tbody = table.getElementsByTagName('tbody')[0];
+                var tr = document.createElement('tr');
+                for(var i=0; i<giocatori; i++)
+                {
+                    var td = document.createElement('td');
+                    var numero = parseInt(prompt("Che punteggio ha fatto il Giocatore "+(i+1)));
+                    if(isNaN(numero))
+                    {
+                        numero=0;
+                    }
+                    var tx = document.createTextNode(numero);
+
+                    somma[i]+=numero;
+
+                    document.getElementById('Somma'+i).value = somma[i];
+                    td.appendChild(tx);
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            function AggiungiRigaNote(id_table)
+            {
+                var table = document.getElementById(id_table);
+                var tbody = table.getElementsByTagName('tbody')[0];
+                var tr = document.createElement('tr');
+                for(var i=0; i<giocatori+1; i++)
+                {
+                    var td = document.createElement('td');
+                    if(i<giocatori)
+                        var tx = document.createTextNode(prompt("Aggiungere nota del Giocatore "+(i+1)));
+                    else
+                        var tx = document.createTextNode("Questa e' una nota");
+
+                    td.appendChild(tx);
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            </script>
+            
+    </head>
+    <body>
+        <table border='2' id='my_table' class='tabella' cellspacing='0' cellpadding='0'>
+            <thead>
+                <tr>
+                    <td>Giocatore 1</td>
+                    <td>Giocatore 2</td>
+                    <td>Giocatore 3</td>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- IL BODY E' INIZIALMENTE VUOTO  -->
+            <tr>
+                <td><input type="text" id="Somma0" disabled></td>
+                <td><input type="text" id="Somma1" disabled></td>
+                <td><input type="text" id="Somma2" disabled></td>
+            </tr>
+            </tbody>
+        </table><br/>
+        <input type='button' value='Aggiungi punteggio' onClick="AggiungiRigaPunteggio('my_table')" />
+        <br><br>
+        <input type='button' value='Aggiungi note' onClick="AggiungiRigaNote('my_table')" />
+        
+    </body>
+</html>
